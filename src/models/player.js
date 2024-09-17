@@ -26,24 +26,23 @@ export class Player {
 
   move(direction, canvasWidth, canvasHeight) {
     console.log(direction);
-    switch (direction) {
-      case "ArrowUp":
-        this.y = Math.max(0, this.y - this.speed);
-        break;
-      case "ArrowDown":
-        this.y = Math.min(canvasHeight - this.size, this.y + this.speed);
-        break;
-      case "ArrowLeft":
-        this.x = Math.max(0, this.x - this.speed);
-        break;
-      case "ArrowRight":
-        this.x = Math.min(canvasWidth - this.size, this.x + this.speed);
-        break;
+    if (direction === "w" || direction === "ArrowUp") {
+      this.y = Math.max(0, this.y - this.speed);
+      return;
+    } else if (direction === "s" || direction === "ArrowDown") {
+      this.y = Math.min(canvasHeight - this.size, this.y + this.speed);
+      return;
+    } else if (direction === "a" || direction === "ArrowLeft") {
+      this.x = Math.max(0, this.x - this.speed);
+      return;
+    } else if (direction === "d" || direction === "ArrowRight") {
+      this.x = Math.min(canvasWidth - this.size, this.x + this.speed);
+
+      return;
     }
   }
 
   drawHealthBar(ctx) {
-    console.log(this.health);
     const barWidth = this.size;
     const barHeight = 5;
     const barX = this.x;

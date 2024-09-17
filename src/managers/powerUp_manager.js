@@ -4,7 +4,6 @@ export class PowerUpManager {
   }
 
   handlePowerUps(player, powerUps) {
-    console.log(powerUps);
     powerUps.forEach((powerUp, powerUpIndex) => {
       // Detectar colisión entre el jugador y el power-up
       const dist = Math.hypot(player.x - powerUp.x, player.y - powerUp.y);
