@@ -24,20 +24,54 @@ export class Player {
     this.drawHealthBar(ctx);
   }
 
-  move(direction, canvasWidth, canvasHeight) {
-    console.log(direction);
-    if (direction === "w" || direction === "ArrowUp") {
+  move(keyPressed, canvasWidth, canvasHeight) {
+    // Movimiento diagonal arriba izquierda
+    if (
+      (keyPressed["w"] && keyPressed["a"]) ||
+      (keyPressed["w"] && keyPressed["ArrowLeft"]) ||
+      (keyPressed["ArrowUp"] && keyPressed["ArrowLeft"]) ||
+      (keyPressed["ArrowUp"] && keyPressed["a"])
+    ) {
+      this.y = Math.max(0, this.y - this.speed);
+      this.x = Math.max(0, this.x - this.speed);
+      // Movimiento diagonal abajo izquierda
+    } else if (
+      (keyPressed["s"] && keyPressed["a"]) ||
+      (keyPressed["s"] && keyPressed["ArrowLeft"]) ||
+      (keyPressed["ArrowDown"] && keyPressed["ArrowLeft"]) ||
+      (keyPressed["ArrowDown"] && keyPressed["a"])
+    ) {
+      this.y = Math.min(canvasHeight - this.size, this.y + this.speed);
+      this.x = Math.max(0, this.x - this.speed);
+      // Movimiento diagonal abajo derecha
+    } else if (
+      (keyPressed["s"] && keyPressed["d"]) ||
+      (keyPressed["s"] && keyPressed["ArrowRight"]) ||
+      (keyPressed["ArrowDown"] && keyPressed["ArrowRight"]) ||
+      (keyPressed["ArrowDown"] && keyPressed["d"])
+    ) {
+      this.x = Math.min(canvasWidth - this.size, this.x + this.speed);
+      this.y = Math.min(canvasHeight - this.size, this.y + this.speed);
+      // Movimiento diagonal arriba derecha
+    } else if (
+      (keyPressed["w"] && keyPressed["d"]) ||
+      (keyPressed["w"] && keyPressed["ArrowRight"]) ||
+      (keyPressed["ArrowUp"] && keyPressed["ArrowRight"]) ||
+      (keyPressed["ArrowUp"] && keyPressed["d"])
+    ) {
+      this.y = Math.max(0, this.y - this.speed);
+      this.x = Math.min(canvasWidth - this.size, this.x + this.speed);
+    } else if (keyPressed["w"] || keyPressed["ArrowUp"]) {
       this.y = Math.max(0, this.y - this.speed);
       return;
-    } else if (direction === "s" || direction === "ArrowDown") {
+    } else if (keyPressed["s"] || keyPressed["ArrowDown"]) {
       this.y = Math.min(canvasHeight - this.size, this.y + this.speed);
       return;
-    } else if (direction === "a" || direction === "ArrowLeft") {
+    } else if (keyPressed["a"] || keyPressed["ArrowLeft"]) {
       this.x = Math.max(0, this.x - this.speed);
       return;
-    } else if (direction === "d" || direction === "ArrowRight") {
+    } else if (keyPressed["d"] || keyPressed["ArrowRight"]) {
       this.x = Math.min(canvasWidth - this.size, this.x + this.speed);
-
       return;
     }
   }

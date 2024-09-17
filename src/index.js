@@ -29,7 +29,7 @@ const players = [
   new Player(
     playerX,
     playerY,
-    2,
+    1,
     130,
     "../src/assets/gif/pasqualina-character.webp",
     "../src/assets/images/guns/runetracer-gun.png"
@@ -38,7 +38,7 @@ const players = [
   new Player(
     playerX,
     playerY,
-    2,
+    1,
     156,
     "../src/assets/gif/gennaro-chracter.webp",
     "../src/assets/images/guns/knife-gun.png"
@@ -47,7 +47,7 @@ const players = [
   new Player(
     playerX,
     playerY,
-    3,
+    1.65,
     143,
     "../src/assets/gif/lama-chracter.webp",
     "../src/assets/images/guns/axe-gun.webp"
@@ -56,7 +56,7 @@ const players = [
   new Player(
     playerX,
     playerY,
-    4,
+    2,
     130,
     "../src/assets/gif/Krochi-character.webp",
     "../src/assets/images/guns/cross-gun.png"

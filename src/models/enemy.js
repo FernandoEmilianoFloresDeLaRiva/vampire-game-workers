@@ -1,12 +1,13 @@
 export class Enemy {
-  constructor(x, y, imgNum, color, speed) {
+  constructor(x, y, imgNum, color, speed, damage = 10, size = 60, health = 100) {
     this.x = x;
     this.y = y;
     this.imgNum = imgNum;
     this.color = color;
     this.speed = speed;
-    this.size = 60;
-    this.health = 100;
+    this.size = size;
+    this.health = health;
+    this.damage = damage
   }
 
   draw(ctx) {

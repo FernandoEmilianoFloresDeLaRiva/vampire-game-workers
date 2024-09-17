@@ -19,7 +19,8 @@ export class EnemyManager {
         y,
         randomImg,
         "red",
-        0.65 + this.waveNumber * 0.05
+        0.65 + this.waveNumber * 0.05,
+        15
       );
       this.enemies.push(enemy);
     }

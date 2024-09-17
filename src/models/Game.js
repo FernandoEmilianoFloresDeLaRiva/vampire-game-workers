@@ -29,6 +29,7 @@ export class Game {
     this.autoFireManager = null;
     this.powerUpManager = new PowerUpManager(this.workerManager);
     this.musicManager = new MusicManager();
+    this.keysPressed = {};
   }
 
   init() {
@@ -62,7 +63,12 @@ export class Game {
     );
 
     document.addEventListener("keydown", (event) => {
-      this.player.move(event.key, this.canvas.width, this.canvas.height);
+      event.preventDefault();
+      this.keysPressed[event.key] = true;
+    });
+
+    document.addEventListener("keyup", (event) => {
+      this.keysPressed[event.key] = false;
     });
 
     // Eventos para el modal
@@ -137,7 +143,7 @@ export class Game {
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.player.draw(this.ctx);
-
+    this.player.move(this.keysPressed, this.canvas.width, this.canvas.height);
     this.uiManager.drawBullets(this.bullets, this.player);
 
     this.enemies.forEach((enemy) => {
@@ -145,7 +151,7 @@ export class Game {
 
       if (enemy.hasCollidedWithPlayer(this.player)) {
         if (!enemy.hasDamagedPlayer && this.player.health !== 0) {
-          this.player.health -= 5;
+          this.player.health -= enemy.damage;
           enemy.hasDamagedPlayer = true;
         }
 

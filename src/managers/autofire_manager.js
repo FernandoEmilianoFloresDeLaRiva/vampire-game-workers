@@ -27,7 +27,7 @@ export class AutoFireManager {
     selectedEnemies.forEach((enemy) => {
       this.workerManager.postMessage(this.workerManager.bulletWorker, {
         action: "addBullet",
-        data: new Bullet(this.player.x, this.player.y, enemy.x, enemy.y, 1),
+        data: new Bullet(this.player.x, this.player.y, enemy.x, enemy.y, 1, 1),
       });
     });
   }
