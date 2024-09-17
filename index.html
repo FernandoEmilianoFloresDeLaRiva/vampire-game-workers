@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego con Workers | Fernando Emiliano Flores De La Riva</title>
+    <link rel="stylesheet" href="./src/styles/index.css" />
+  </head>
+  <body>
+    <!-- Botón para empezar el juego -->
+    <span id="start-game" class="blink">DA CLICK PARA EMPEZAR</span>
+    <!-- Seleccion de personaje -->
+    <div id="selectCharacterComponent" class="character-container">
+      <div class="stats-character">
+        <div class="stat">
+          <picture>
+            <img
+              src="./src/assets/images/icons/max-health.webp"
+              alt="health-icon"
+            />
+            <caption>
+              Max vida
+            </caption>
+          </picture>
+          <span id="health-state"></span>
+        </div>
+        <div class="stat">
+          <picture>
+            <img
+              src="./src/assets/images/icons/move-speed.webp"
+              alt="move-speed"
+            />
+            <caption>
+              velocidad
+            </caption>
+          </picture>
+          <span id="speed-state"></span>
+        </div>
+      </div>
+      <div class="select-character-container">
+        <span class="character-selection-title">Selección de Personaje</span>
+        <div class="characters-container">
+          <article class="character" id="pasqualina-article">
+            <span>Pasqualina</span>
+            <div class="character-images-container">
+              <img
+                src="./src/assets/gif/pasqualina-character.webp"
+                alt="character"
+                class="character-img"
+              />
+              <img
+                src="./src/assets/images/guns/runetracer-gun.png"
+                alt="character-weapon"
+                class="character-weapon"
+              />
+            </div>
+          </article>
+          <article class="character" id="gennaro-article">
+            <span>Gennaro</span>
+            <div class="character-images-container">
+              <img
+                src="./src/assets/gif/gennaro-chracter.webp"
+                alt="character"
+                class="character-img"
+              />
+              <img
+                src="./src/assets/images/guns/knife-gun.png"
+                alt="character-weapon"
+                class="character-weapon"
+              />
+            </div>
+          </article>
+          <article class="character" id="lama-article">
+            <span>Lama</span>
+            <div class="character-images-container">
+              <img
+                src="./src/assets/gif/lama-chracter.webp"
+                alt="character"
+                class="character-img"
+              />
+              <img
+                src="./src/assets/images/guns/axe-gun.webp"
+                alt="character-weapon"
+                class="character-weapon"
+                style="margin-bottom: 5px; width: 22%"
+              />
+            </div>
+          </article>
+          <article class="character" id="krochi-article">
+            <span>Lama</span>
+            <div class="character-images-container">
+              <img
+                src="./src/assets/gif/Krochi-character.webp"
+                alt="character"
+                class="character-img"
+              />
+              <img
+                src="./src/assets/images/guns/cross-gun.png"
+                alt="character-weapon"
+                class="character-weapon"
+              />
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="btn-confirm-container">
+        <button id="choose-character" class="green-btn">Confirmar</button>
+      </div>
+    </div>
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+    <!-- Modal gameover -->
+    <div id="gameOverModal" class="modal">
+      <div class="modal-content">
+        <h2>JUEGO TERMINADO</h2>
+        <div class="buttons_container">
+          <button id="restartGame" class="green-btn">REINICIAR JUEGO</button>
+          <button id="closeModal">CERRAR</button>
+        </div>
+      </div>
+    </div>
+    <!-- creditos -->
+    <p>
+      <b>Hecho por Fernando Emiliano Flores De La Riva</b>
+    </p>
+    <script type="module" src="./src/index.js"></script>
+  </body>
+</html>
