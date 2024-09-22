@@ -14,12 +14,11 @@ export class Game {
     this.player = player;
     this.bullets = [];
     this.powerUps = [];
-    //  Cada 5 oleadas agregar boss
     this.waveNumber = 1;
     this.gameOver = false;
     this.startTime = Date.now();
     this.enemies = [];
-    this.enemyManager = new EnemyManager(this.canvas, this.waveNumber);
+    this.enemyManager = new EnemyManager(this.canvas, this.waveNumber, this.ctx);
     this.workerManager = new WorkerManager();
     this.scoreManager = new ScoreManager();
     this.uiManager = new UIManager(this.ctx);
@@ -92,13 +91,14 @@ export class Game {
     const { newWave, waveNumber: newWaveNumber } = e.data;
     if (newWave) {
       this.waveNumber = newWaveNumber;
-      this.enemies = this.enemyManager.generateEnemies(
+      const enemies = this.enemyManager.generateEnemies(
         10 + newWaveNumber * 3,
         0.65,
         15,
         55,
         100
       );
+      this.enemies = [...this.enemies, ...enemies]
     }
   }
 
@@ -140,11 +140,6 @@ export class Game {
   }
 
   updateGame() {
-    if (this.gameOver) {
-      this.checkGameOver();
-      return;
-    }
-
     const currentTime = Date.now();
     const elapsedTime = currentTime - this.startTime;
 
@@ -153,23 +148,13 @@ export class Game {
     this.player.move(this.keysPressed, this.canvas.width, this.canvas.height);
     this.uiManager.drawBullets(this.bullets, this.player);
 
-    this.enemies.forEach((enemy) => {
-      enemy.draw(this.ctx);
-
-      if (enemy.hasCollidedWithPlayer(this.player)) {
-        if (!enemy.hasDamagedPlayer && this.player.health !== 0) {
-          this.player.health -= enemy.damage;
-          enemy.hasDamagedPlayer = true;
-        }
-
-        if (this.player.health <= 0) {
-          this.gameOver = true;
-        }
-      } else {
-        enemy.hasDamagedPlayer = false;
-      }
-    });
-
+    this.gameOver = this.enemyManager.verifyCollisionWithPlayer(this.enemies, this.player, this.gameOver) ?? false
+    
+    if (this.gameOver) {
+      this.checkGameOver();
+      return;
+    }
+    
     this.collisionManager.detectCollisions(this.bullets, this.enemies);
 
     this.workerManager.postMessage(this.workerManager.bulletWorker, {
@@ -179,6 +164,7 @@ export class Game {
     this.workerManager.postMessage(this.workerManager.waveWorker, {
       enemies: this.enemies,
       waveNumber: this.waveNumber,
+      gameOver: this.gameOver
     });
 
     this.workerManager.postMessage(this.workerManager.powerupWorker, {

@@ -17,7 +17,7 @@ export class UIManager {
     this.ctx.fillStyle = "white";
     this.ctx.font = "bold 20px Courier";
     this.ctx.fillText(`${this.formatTime(elapsedTime)}`, 245, 30);
-    this.ctx.fillText(`Oleada: ${waveNumber}`, 20, 30);
+    // this.ctx.fillText(`Oleada: ${waveNumber}`, 20, 30);
   }
 
   drawPowerUps(powerUps) {
@@ -36,12 +36,6 @@ export class UIManager {
   drawBullets(bullets, player) {
     bullets?.forEach((bullet) => {
       this.ctx.drawImage(player.imgGun, bullet.x, bullet.y, 16, 16);
-
-      // this.ctx.beginPath();
-      // this.ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
-      // this.ctx.fillStyle = "blue";
-      // this.ctx.fill();
-      // this.ctx.closePath();
     });
   }
 

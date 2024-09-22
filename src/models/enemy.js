@@ -3,6 +3,7 @@ export class Enemy {
     "../src/assets/gif/Sprite-BAT1.webp",
     "../src/assets/gif/Sprite-MILK.webp",
     "../src/assets/gif/Sprite-MOLISANO_VECCHIO.webp",
+    "../../src/assets/gif/Sprite-undead-image.webp"
   ].map((src) => {
     const img = new Image();
     img.src = src;
@@ -23,16 +24,6 @@ export class Enemy {
   draw(ctx) {
     const img = Enemy.images[this.imgNum];
     ctx.drawImage(img, this.x, this.y, this.size, this.size);
-  }
-  moveTowardPlayer(player) {
-    const dx = player.x - this.x;
-    const dy = player.y - this.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist > 0) {
-      this.x += (dx / dist) * this.speed;
-      this.y += (dy / dist) * this.speed;
-    }
   }
 
   hasCollidedWithPlayer(player) {
