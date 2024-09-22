@@ -92,7 +92,7 @@ export class Game {
     if (newWave) {
       this.waveNumber = newWaveNumber;
       const enemies = this.enemyManager.generateEnemies(
-        10 + newWaveNumber * 3,
+        10 + newWaveNumber * 2,
         0.65,
         15,
         55,
