@@ -14,6 +14,7 @@ export class Game {
     this.player = player;
     this.bullets = [];
     this.powerUps = [];
+    //  Cada 5 oleadas agregar boss
     this.waveNumber = 1;
     this.gameOver = false;
     this.startTime = Date.now();
@@ -91,7 +92,13 @@ export class Game {
     const { newWave, waveNumber: newWaveNumber } = e.data;
     if (newWave) {
       this.waveNumber = newWaveNumber;
-      this.enemies = this.enemyManager.generateEnemies(10 + newWaveNumber * 3);
+      this.enemies = this.enemyManager.generateEnemies(
+        10 + newWaveNumber * 3,
+        0.65,
+        15,
+        55,
+        100
+      );
     }
   }
 

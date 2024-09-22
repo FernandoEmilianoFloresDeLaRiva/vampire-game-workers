@@ -7,20 +7,33 @@ export class EnemyManager {
     this.enemies = [];
   }
 
-  generateEnemies(numberOfEnemies) {
+  generateEnemies(
+    numberOfEnemies,
+    speed = 0.65,
+    damage = 15,
+    size = 55,
+    health = 100
+  ) {
     this.enemies = [];
     const enemySize = 20;
     for (let i = 0; i < numberOfEnemies; i++) {
+      const randomImg = Math.floor(Math.random() * 3);
+
       const x = Math.random() * (this.canvas.width - enemySize);
       const y = Math.random() * (this.canvas.height - enemySize);
-      const randomImg = Math.floor(Math.random() * 3);
       const enemy = new Enemy(
         x,
         y,
         randomImg,
         "red",
-        0.65 + this.waveNumber * 0.05,
-        15
+        // speed
+        speed + this.waveNumber * 0.05,
+        // damage
+        damage,
+        // size
+        size,
+        // health
+        health
       );
       this.enemies.push(enemy);
     }

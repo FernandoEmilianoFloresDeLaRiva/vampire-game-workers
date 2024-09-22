@@ -1,4 +1,14 @@
 export class Enemy {
+  static images = [
+    "../src/assets/gif/Sprite-BAT1.webp",
+    "../src/assets/gif/Sprite-MILK.webp",
+    "../src/assets/gif/Sprite-MOLISANO_VECCHIO.webp",
+  ].map((src) => {
+    const img = new Image();
+    img.src = src;
+    return img;
+  });
+
   constructor(x, y, imgNum, color, speed, damage = 10, size = 60, health = 100) {
     this.x = x;
     this.y = y;
@@ -7,20 +17,13 @@ export class Enemy {
     this.speed = speed;
     this.size = size;
     this.health = health;
-    this.damage = damage
+    this.damage = damage;
   }
 
   draw(ctx) {
-    const imgs = [
-      "../src/assets/gif/Sprite-BAT1.webp",
-      "../src/assets/gif/Sprite-MILK.webp",
-      "../src/assets/gif/Sprite-MOLISANO_VECCHIO.webp",
-    ];
-    let img = new Image();
-    img.src = imgs[this.imgNum];
+    const img = Enemy.images[this.imgNum];
     ctx.drawImage(img, this.x, this.y, this.size, this.size);
   }
-
   moveTowardPlayer(player) {
     const dx = player.x - this.x;
     const dy = player.y - this.y;
