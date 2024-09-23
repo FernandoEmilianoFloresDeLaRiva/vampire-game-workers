@@ -23,4 +23,9 @@ export class MusicManager {
     // Reinicia la música
     this.backgroundMusic.currentTime = 0;
   }
+
+  playGameOverMusic(){
+    const gameOverMusic = new Audio('../src/assets/audio/game-over.mp3');
+    gameOverMusic.play()
+  }
 }

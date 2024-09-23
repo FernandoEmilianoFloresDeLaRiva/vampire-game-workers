@@ -256,6 +256,26 @@ button:hover {
   border-radius: 10px;
   letter-spacing: -3.5px;
   font-family: var(--main-font);
+  animation: animated_modal 2s ease 0s 1 normal forwards;
+}
+
+@keyframes animated_modal {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.8;
+    background: linear-gradient(
+      180deg,
+      #94303d86,
+      #94303d86,
+      #42040dae,
+      #42040dae
+    );
+  }
 }
 
 .modal-content h2 {

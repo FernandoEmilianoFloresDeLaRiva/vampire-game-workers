@@ -18,7 +18,11 @@ export class Game {
     this.gameOver = false;
     this.startTime = Date.now();
     this.enemies = [];
-    this.enemyManager = new EnemyManager(this.canvas, this.waveNumber, this.ctx);
+    this.enemyManager = new EnemyManager(
+      this.canvas,
+      this.waveNumber,
+      this.ctx
+    );
     this.workerManager = new WorkerManager();
     this.scoreManager = new ScoreManager();
     this.uiManager = new UIManager(this.ctx);
@@ -98,7 +102,7 @@ export class Game {
         55,
         100
       );
-      this.enemies = [...this.enemies, ...enemies]
+      this.enemies = [...this.enemies, ...enemies];
     }
   }
 
@@ -136,6 +140,7 @@ export class Game {
     if (this.player.health <= 0) {
       this.showGameOverModal();
       this.musicManager.stopMusic();
+      this.musicManager.playGameOverMusic();
     }
   }
 
@@ -148,13 +153,18 @@ export class Game {
     this.player.move(this.keysPressed, this.canvas.width, this.canvas.height);
     this.uiManager.drawBullets(this.bullets, this.player);
 
-    this.gameOver = this.enemyManager.verifyCollisionWithPlayer(this.enemies, this.player, this.gameOver) ?? false
-    
+    this.gameOver =
+      this.enemyManager.verifyCollisionWithPlayer(
+        this.enemies,
+        this.player,
+        this.gameOver
+      ) ?? false;
+
     if (this.gameOver) {
       this.checkGameOver();
       return;
     }
-    
+
     this.collisionManager.detectCollisions(this.bullets, this.enemies);
 
     this.workerManager.postMessage(this.workerManager.bulletWorker, {
@@ -164,7 +174,7 @@ export class Game {
     this.workerManager.postMessage(this.workerManager.waveWorker, {
       enemies: this.enemies,
       waveNumber: this.waveNumber,
-      gameOver: this.gameOver
+      gameOver: this.gameOver,
     });
 
     this.workerManager.postMessage(this.workerManager.powerupWorker, {

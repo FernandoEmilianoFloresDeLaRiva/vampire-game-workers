@@ -3,14 +3,23 @@ export class Enemy {
     "../src/assets/gif/Sprite-BAT1.webp",
     "../src/assets/gif/Sprite-MILK.webp",
     "../src/assets/gif/Sprite-MOLISANO_VECCHIO.webp",
-    "../../src/assets/gif/Sprite-undead-image.webp"
+    "../../src/assets/gif/Sprite-undead-image.webp",
   ].map((src) => {
     const img = new Image();
     img.src = src;
     return img;
   });
 
-  constructor(x, y, imgNum, color, speed, damage = 10, size = 60, health = 100) {
+  constructor(
+    x,
+    y,
+    imgNum,
+    color,
+    speed,
+    damage = 10,
+    size = 60,
+    health = 100
+  ) {
     this.x = x;
     this.y = y;
     this.imgNum = imgNum;
